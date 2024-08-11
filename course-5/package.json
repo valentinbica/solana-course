@@ -1,0 +1,23 @@
+{
+  "name": "course-5",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "dependencies": {
+    "@metaplex-foundation/js": "^0.20.1",
+    "@solana-developers/helpers": "2.3.0",
+    "@solana/spl-token": "^0.3.7",
+    "@solana/web3.js": "^1.93.1",
+    "dotenv": "^16.4.5",
+    "esrun": "^3.2.26"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
