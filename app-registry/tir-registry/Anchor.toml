@@ -11,7 +11,7 @@ tir_registry = "J31qcCrD5wyFTKyRhD7z3FTfWq24NZ1AMUWnn7g9GDBx"
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "Localnet"
+cluster = "devnet"
 wallet = "~/.config/solana/id.json"
 
 [scripts]

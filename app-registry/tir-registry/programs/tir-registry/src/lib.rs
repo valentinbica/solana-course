@@ -23,36 +23,37 @@ pub mod issuer_registry {
 }
 
 #[account]
-pub struct DidEntry {
+pub struct Issuer {
     pub owner: Pubkey,
     pub did: String,
-    pub did_document: String,
+    pub issuer_data: String,
 }
 
 #[derive(Accounts)]
 pub struct RegisterIssuer<'info> {
-    #[account(init, payer = owner, space = 8 + 32 + 36 + 1024)]
+    #[account(
+        init,
+        payer = owner,
+        seeds = [b"issuer", owner.key().as_ref()],
+        bump,
+        space = 8 + 32 + 4 + 32 + 512 // Fixed sizes for `did` and `issuer_data`
+    )]
     pub issuer: Account<'info, Issuer>,
     #[account(mut)]
     pub owner: Signer<'info>,
-    /// CHECK: This is only a reference to an existing DID entry, not an account we're creating or modifying
-    #[account(constraint = did_entry.owner == issuer.owner)]
-    pub did_entry: Account<'info, DidEntry>,
     pub system_program: Program<'info, System>,
 }
 
 #[derive(Accounts)]
 pub struct UpdateIssuer<'info> {
-    #[account(mut, has_one = owner)]
+    #[account(
+        mut,
+        has_one = owner,
+        seeds = [b"issuer", owner.key().as_ref()],
+        bump
+    )]
     pub issuer: Account<'info, Issuer>,
     pub owner: Signer<'info>,
-}
-
-#[account]
-pub struct Issuer {
-    pub owner: Pubkey,
-    pub did: String,
-    pub issuer_data: String,
 }
 
 #[error_code]
